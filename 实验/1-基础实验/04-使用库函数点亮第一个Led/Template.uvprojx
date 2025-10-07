@@ -442,11 +442,6 @@
               <FileType>1</FileType>
               <FilePath>.\App\led\led.c</FilePath>
             </File>
-            <File>
-              <FileName>led.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\App\led\led.h</FilePath>
-            </File>
           </Files>
         </Group>
       </Groups>

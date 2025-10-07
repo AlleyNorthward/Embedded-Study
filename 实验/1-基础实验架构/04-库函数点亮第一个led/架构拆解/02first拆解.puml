@@ -1,0 +1,7 @@
+@startuml 02first拆解
+class RCC_APB2PeriphClockCmd()拆解{
+    --参数--
+    + uint32_t RCC_APB2Periph
+    + FunctionalState NewState
+}
+@enduml

@@ -1,0 +1,11 @@
+@startuml 00基本步骤
+class 基本步骤{
+    --first step--
+    + 使能APB2总线上的时钟
+    --second--
+    + 初始化GPIO
+    --third--
+    + 设置低电平
+}
+
+@enduml

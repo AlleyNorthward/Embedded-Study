@@ -1,0 +1,10 @@
+@startuml 01对应函数
+class 对应函数{
+    --first step--
+    void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
+    --second step--
+    void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
+    --third step--
+    void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+}
+@enduml
