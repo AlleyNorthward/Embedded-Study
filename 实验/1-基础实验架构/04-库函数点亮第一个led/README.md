@@ -9,13 +9,16 @@
     - [first拆解](#first拆解)
     - [second拆解](#second拆解)
     - [third拆解](#third拆解)
+    - [fourth拆解](#fourth拆解)
+- [led原理](#led原理)
 
+---
 
 # 基本步骤
 
 <p align="center">
     <a href = "https://github.com" target="_blank">
-        <img src=".\out\架构拆解\00基本步骤.svg" alt="基本步骤图片" title = "基本步骤">
+        <img src=".\assets\架构拆解\00基本步骤.svg" alt="基本步骤图片" title = "基本步骤">
     </a>
 </p>
 
@@ -27,7 +30,7 @@
 
 <p align="center">
     <a href = "https://github.com" target="_blank">
-        <img src=".\out\架构拆解\01对应函数.svg" alt="对应函数图片" title = "对应函数">
+        <img src=".\assets\架构拆解\01对应函数.svg" alt="对应函数图片" title = "对应函数">
     </a>
 </p>
 
@@ -42,7 +45,7 @@
 
 <p align="center">
     <a href = "https://github.com" target="_blank">
-        <img src=".\out\架构拆解\02first拆解.svg" alt="first拆解图片" title = "first拆解">
+        <img src=".\assets\架构拆解\02first拆解.svg" alt="first拆解图片" title = "first拆解">
     </a>
 </p>
 
@@ -60,7 +63,7 @@
 
 <p align="center">
     <a href = "https://github.com" target="_blank">
-        <img src=".\out\架构拆解\03second拆解.svg" alt="second拆解图片" title = "second拆解">
+        <img src=".\assets\架构拆解\03second拆解.svg" alt="second拆解图片" title = "second拆解">
     </a>
 </p>
 
@@ -69,4 +72,75 @@
 - 第二个参数, 溯源后发现竟然是结构体指针.这样的话,我们找到对应的结构体,看看内部参数,然后在`led.c`文件中,显式地定义一个结构体变量,并且给内部参数赋值.赋值之后,就可以传参了.别忘了传入的是引用(地址).
 - 但是问题是,结构体内部参数,如何赋值呢?或者说,是什么类型的呢?
 - 还是按照基本步骤,溯源`GPIO_Init()`,找到`assert_param`,一个一个看就行
-- 结构体参数,有个选50hz的,说的是一般都选,有一个是选择`GPIO_Mode_AF_PP`这个模式,下面两个是复用的,不用到,这个和左边的是输出的,没有 特殊说明就选这个.虽然不理解,但是目前来看,知道就行.这个模式名叫做推挽输出,能输出高电平和低电平,是最常用的输出模式.ai了一下,就不放在这里了.
+- 结构体参数,有个50hz的,说的是一般都选这个,有一个是选择`GPIO_Mode_AF_PP`这个模式,下面两个是复用的,不用到,这个和左边的是输出的,没有 特殊说明就选这个.虽然不理解,但是目前来看,知道就行.这个模式名叫做推挽输出,能输出高电平和低电平,是最常用的输出模式.ai了一下,就不放在这里了.
+
+## third拆解
+
+<p align="center">
+    <a href = "https://github.com" target="_blank">
+        <img src=".\assets\架构拆解\04third拆解.svg" alt="third拆解图片" title = "third拆解">
+    </a>
+</p>
+
+- 这个函数名, 就是设置某端口管脚输出的电平的. 这个函数是设置为高电平.注意,它只管输出的,输入不管的.
+- 第一个参数跟`second`的第一个参数传的是一样的.其实就是传的GPIO的某端口.比如,我的二极管对应端口为`PB`,那么这里传参就是`GPIOB`,代表的是`B`端口.
+- 第二个参数代表的是引脚.其实在`second`中也有,只不过是在接口体中赋的值.比如我想找`PB5`,端口`B`的第五个引脚, 那么这里就传入对应引脚就好了.`Pin`就是代表的第几个引脚.
+
+## fourth拆解
+
+<p align="center">
+    <a href = "https://github.com" target="_blank">
+        <img src=".\assets\架构拆解\05fourth拆解.svg" alt="fourth拆解图片" title = "fourth拆解">
+    </a>
+</p>
+
+- 跟`third`类似,这里不多说了
+- 设置`GPIO`管脚输出为低电平.
+
+> 似乎大体就这么多. 写完后也明白清晰了很多.
+> 关键点有下面这些
+> - 弄清基本原理
+> - 搞明白需要哪些函数,以及该函数的作用是什么
+> - 学会查找函数参数,对于有特殊含义的参数,需要清楚所选择参数的含义
+
+> 其他的似乎就没有了, 编程相关的东西太熟悉了,也不多说了.
+
+# led原理
+
+<p align="center">
+    <a href = "https://github.com" target="_blank">
+        <img src=".\assets\架构拆解\led原理图.png" alt="led原理图片" title = "led原理图">
+    </a>
+</p>
+
+- 其实普中里面有图,但是我不想用,想用自己`multisim`模拟出来的图.
+- 结构说明
+    - 左侧`vcc`3.3v是电源通电端口, 也就是用户自主输入端.
+    - 电阻`R1`为保护电阻.
+    - `LED1`就是发光二极管.左侧为阳极,右侧为阴极.
+    - `S1`模拟设置`GPIO`的高低电平转换器.
+    - 最右侧就是模拟`GPIO`的输出电平了.
+- 二极管阴极设为低电平就会发光.
+- 二极管发光原理:由于阳极始终接在`vcc`中,所以一直为高电平.阴极输入高电平时,`LED1`内部相对电压为0(3.3 - 3.3),此时不发光.阴极输入为低电平时,相对电压为3.3v,此时就发光了.
+- 基本原理:
+    - `STM32` 的 `CPU` `GPIO` `USART` `ADC` `TIM` `SPI`等外设,都需要时钟信号才能工作.而这些时钟都由`RCC`模块统一分配与控制.所以一上来需要使能时钟.
+    - `GPIO`的初始化, 需要选择对应的模式,速度,管脚等.其中模式有很多,详细在架构拆解中有说明.这里需要推挽输出,来决定输出的高低电平.
+    - 接下来就是设置高低电平了.
+- `GPIO`详细说明
+    - `GPIO`有很多端口(`port`),比如`PA`, `PB`, `PC`等等.对应的代码中,就是`GPIOA`, `GPIOB`, `GPIOC`等等.每个端口都有16个引脚(0~15),所以我们在硬件上,经常看到`PB1`,`PE3`等描述,代表的就是`B`端口的第一引脚与`E`端口的第三引脚.
+    - `GPIO`有很多模式,目前,需要知道的模式就是推挽输出,可以设置高低电平.还有其它的很多模式,等后续用到后,再来分析.
+    - `GPIO`的所有管脚, 在`f103`系列,似乎都在`APB2`总线上.
+    - 本实验模拟的`led`处于`PB5`上.
+- 软件(代码)分析:
+    - 第一步,我们一定要开启时钟.对应函数`RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)`.函数名是调节APB2总线上外设时钟.上面说了,`GPIO`所有管脚似乎都在`APB2`总线上,所以这个函数以后会经常用到.
+        - 第一个参数是选择外设.我们需要的是`B`端口,所以找到对应参数传入即可.
+        - 第二个参数是使能或禁止.
+    - 第二步,初始化`GPIO`,对应函数为`void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)`.
+        - 第一个参数是选择哪个端口.
+        - 第二个参数是接收一个结构体,内部有三个参数,分别为速度(一般选50hz),管脚(pin,我们需要的是5),模式(推挽模式,对应为`GPIO_Mode_Out_PP`).
+    - 第三步,设置初始电平为高电平,避免一上来就开启.对应函数为`void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)`
+        - 第一个参数也是选择哪个端口,与上面的那个第一个参数一致.
+        - 第二个则是找到对应管脚.也与上面类似,只不过上面管脚参数封装到了结构体里.
+    - 接下来,我们将上面功能,封装到一个函数中,名字设为`LED_INIT(void)`,这样方便我们在`main`中调用.
+    - 最后,在`main`中调用`LED_INIT(void)`,并且调节低电平,就能发光了.低电平对于函数为`void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)`,其参数与`SetBits`函数一致,
+- 软件部分结束后的操作就不说了, 关于代码的设计, 还需要多看看别人写的代码, 然后了解一下基本模式, 再去多练习写写.

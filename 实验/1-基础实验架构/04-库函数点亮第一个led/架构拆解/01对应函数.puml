@@ -6,5 +6,7 @@ class 对应函数{
     void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
     --third step--
     void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+    --fourth step--
+    void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 }
 @enduml
