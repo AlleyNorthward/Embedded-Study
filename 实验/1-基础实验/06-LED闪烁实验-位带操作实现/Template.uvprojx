@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Libraries\CMSIS;.\User;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\App\led</IncludePath>
+              <IncludePath>.\Libraries\CMSIS;.\User;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\App\led;.\App\clock;.\Public</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -441,6 +441,21 @@
               <FileName>led.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\App\led\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\App\clock\clock.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Public</GroupName>
+          <Files>
+            <File>
+              <FileName>system.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Public\system.c</FilePath>
             </File>
           </Files>
         </Group>
