@@ -18,6 +18,19 @@
 		- [嵌入式指针应用](#嵌入式指针应用)
 			- [小试牛刀](#小试牛刀)
 			- [结构体指针](#结构体指针)
+- [库函数映射关系](#库函数映射关系)
+    - [基础知识](#基础知识)
+        - [寄存器](#寄存器)
+        - [掩码(`mask`)](#掩码mask)
+        - [&|!运算符](#运算符)
+    - [库函数知识](#库函数知识)
+        - [类型](#类型)
+        - [结构体变量分配](#结构体变量分配)
+    - [库函数分析](#库函数分析)
+        - [举例1](#举例1)
+        - [举例2](#举例2)
+        - [举例3](#举例3)
+
 
 
 ## 目前问题
@@ -327,4 +340,210 @@ typedef struct {
 - 注意,上面的`?`是值,还是地址?这是非常关键的.`->`其实就是访问变量`MODER`,所以`GPIOA->MODER`本身就是一个变量,并不是指针.
 - `?`这里对应的其实是值.因为我们有数据类型(`uint32_t`),其实也就代表它有地址了.并且其地址,是基于`GPIOA`的地址获取的.比如,`MODER`的地址可能为`RCC_BASE + 0x20`,具体的要看芯片内部地址的划分了.
 - 不过从`C`中怎么抽象划分地址的,我还没仔细看库,所以知道`GPIOA`是结构体指针,指向基地址`RCC_BASE`,其结构体内部的变量,已经按照基地址,分配好了本身的地址.
+- 明白了.注意,其类型都是`uint32_t`,`32`位,四个字节.所以从上到下,每个变量相对于`GPIOA`地址偏移四个字节.虽然没有显式地规定,但是`C`的结构体决定了其地址这么分配.
 > 有了这些先决条件后,再去分析库,就会好很多了.
+
+## 库函数映射关系
+关于这里的结构还没有想好,不过已经明白很多了,所以尽量把想说的点都说了.
+### 基础知识
+#### 寄存器
+- 关于寄存器,我就简单说说吧,因为确实没有理解.
+- 寄存器是CPU内部高速存储单元,软件通过它进行运算和控制,硬件通过它执行指令.
+- 所以,寄存器相当于软件与硬件之间的桥梁.
+- 我们操作`GPIO`,实际上就是将软件信息(二进制)传递给寄存器,从而操作寄存器当中的值(二进制),从而实现对`GPIO`的操作.
+- GPIO寄存器(通常在外设寄存器地址空间中)存储了对应引脚的控制状态,写寄存器即改变引脚电平或模式.
+#### 掩码(`mask`)
+- 那么我们如何操作寄存器的值呢?
+- 通过`mask`来操作.比如,我们知道某寄存器地址,它有对应的值,对应这硬件的某个状态.软件端,我可以通过指针访问这个地址,并且通过掩码,来修改这个值,从而改变硬件的状态.
+- 掩码其实也是二进制值,在`C`中通过`8`位`16`进制来表示.
+#### &|~运算符
+- 有了掩码,如何跟寄存器的值做运算呢??没错,就是通过`&,|,~`,分别代表按位与,按位或,取反.哦对了,还有`^`,好像是按位异或.
+- 这些运算符,可以|=,&= ~等赋值方式,修改寄存器内部某地址下的值,从而让硬件做出对应的变化.
+- 不过这些底层的运算,标准库已经给我们封装好了,不用专门记忆.但是,知道对应过程,可以便于我们理解.
+### 库函数知识
+#### 类型
+- 关于变量类型,我目前只知道`uint32_t`,和其他的结构体变量,其它的后续再说.
+- 关于这个类型`uint32_t`,是地址类型,也是掩码类型.当然,有的掩码是`uint16_t`,等等.
+- 那么如何区分我们需要操作的是地址还是掩码呢?
+- 看宏定义,当出现`((...Typedef*)0x....)`时,是个结构体指针,结构体内部,对应着一系列变量.这些变量的地址,就代表着寄存器相关部位的实际地址.我们将掩码,通过运算符操作运算,就会修改这些变量的值,从而达到操控寄存器的目的.(关于结构体内部变量地址如何划分的,我们后面再说)
+- 有时候函数传参,需要我们传`uint32_t`类型,那么大概率是相关掩码.有时候需要我们传+时,是个指针,函数内部会帮我们将相关掩码运算实现,从而达到操控寄存器的目的.当然,还有其它传参,这点不关注.
+- 看了看,`u8`等,是上面的缩写.除此之外,还有`bool`(`FunctionalState`)类型,似乎就这么多.
+#### 结构体变量内存分配
+- 对于结构体内部变量,一般情况也是`uint32_t`类型.我们给其赋值,并不是赋值的地址,而是掩码.那么其地址如何分配的呢?
+- 关于结构体指针,它一定指向某个地址,也就是寄存器的某个部分.结构体内部变量由于是`uint32_t`类型,占四个字节,所以,其变量从上到下会沿着初始指针指向的基地址偏移四位.最终地址就这么划分出来了.我们想操作内部的值,只需要指针访问改变就可以了.
+- 可能是芯片设计吧,要不然不可能这么巧合.
+#### 区分掩码和地址
+- 赋值的,一定是掩码(或值),被赋值的,是变量,存在地址.
+- 以`uintx_t`传参的,是掩码,以`((...Typedef*)0x....)`这种形式传参的,是指针,指针内部指向的,是变量,存在地址.
+- 还有就是宏定义部分,`8`位十六进制数,大概率是地址,小于`8`位的大概率是掩码.
+- 另外,宏名中带有`BASE`的,是地址,单独只有十六进制数值,却没有其它的(添加其它基地址, 名字不带有`BASE`的),大概率是掩码.
+- 上面说的都不一定,经验之谈,具体问题具体分析.
+- 下面说个例子吧.
+~~~C
+void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+  /* Check the parameters */
+  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+  assert_param(IS_GPIO_PIN(GPIO_Pin));
+  
+  GPIOx->BSRR = GPIO_Pin;
+}
+~~~
+- 很明显,BSRR是具体变量,给其地址赋值,而GPIO_Pin是掩码.
+- 这里也不是掩码,GPIO_Pin是值.因为没有`&|^`等运算符.
+- 所以说,具体问题,具体分析,哈哈.
+
+### 库函数分析
+上面说了这么多,感觉也说完了.下面就结合实际,分析一下吧.还是只分析小灯的,其它的大差不差了.
+#### 举例1
+~~~C
+void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState)
+{
+  /* Check the parameters */
+  assert_param(IS_RCC_APB2_PERIPH(RCC_APB2Periph));
+  assert_param(IS_FUNCTIONAL_STATE(NewState));
+  if (NewState != DISABLE)
+  {
+    RCC->APB2ENR |= RCC_APB2Periph;
+  }
+  else
+  {
+    RCC->APB2ENR &= ~RCC_APB2Periph;
+  }
+}
+~~~
+- 这是一个APB2总线上的时钟控制函数.看参数,我们知道,前者`RCC_APB2Periph`是掩码,后者`NewState`是`bool`类型,相当于开关.
+- 后面,我们看到,指针`RCC`指向其结构体变量`APB2ENR`,并且赋值了`RCC_APB2Periph`,从而达到使能或禁止时钟的目的.
+- 接下来,我们去底层,看看变量`RCC_APB2Periph`和`NewState`.
+~~~C
+#define RCC_APB2Periph_GPIOB             ((uint32_t)0x00000008)
+typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;
+#define IS_FUNCTIONAL_STATE(STATE) (((STATE) == DISABLE) || ((STATE) == ENABLE))
+~~~
+- 可以看到,基本符合我们的分析.上面的虽然是八位,但是明显没有`BASE`.下面的,很明显就是`bool`类型,用于判断的.
+#### 举例2
+~~~C
+void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
+{
+  uint32_t currentmode = 0x00, currentpin = 0x00, pinpos = 0x00, pos = 0x00;
+  uint32_t tmpreg = 0x00, pinmask = 0x00;
+  /* Check the parameters */
+  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+  assert_param(IS_GPIO_MODE(GPIO_InitStruct->GPIO_Mode));
+  assert_param(IS_GPIO_PIN(GPIO_InitStruct->GPIO_Pin));  
+  ...
+}
+~~~
+- 这个初始化函数,太长了,只贴出来部分.
+- GPIOx,必然为指针,指向某地址,操控着某些变量.
+- GPIO_InitStruct也是指针,也指向某地址,但是是否是寄存器地址呢?目前不得而知,得去判断一下.
+- 溯源`GPIOx`.
+~~~C
+typedef struct
+{
+  __IO uint32_t CRL;
+  __IO uint32_t CRH;
+  __IO uint32_t IDR;
+  __IO uint32_t ODR;
+  __IO uint32_t BSRR;
+  __IO uint32_t BRR;
+  __IO uint32_t LCKR;
+} GPIO_TypeDef;
+
+#define IS_GPIO_ALL_PERIPH(PERIPH) (((PERIPH) == GPIOA) || \
+                                    ((PERIPH) == GPIOB) || \
+                                    ((PERIPH) == GPIOC) || \
+                                    ((PERIPH) == GPIOD) || \
+                                    ((PERIPH) == GPIOE) || \
+                                    ((PERIPH) == GPIOF) || \
+                                    ((PERIPH) == GPIOG))
+
+#define GPIOB               ((GPIO_TypeDef *) GPIOB_BASE)
+~~~
+
+- 结合来看,这里要求我们我们传入指针,但是该指针,并不要求我们自己在外面控制,而是函数中帮我们赋值了.所以结合来看,这里其实就是要让我们传入待操作端口地址.
+- 那么我们再来看看第二个参数吧.
+~~~C
+typedef struct
+{
+  uint16_t GPIO_Pin;             /*!< Specifies the GPIO pins to be configured.
+                                      This parameter can be any value of @ref GPIO_pins_define */
+
+  GPIOSpeed_TypeDef GPIO_Speed;  /*!< Specifies the speed for the selected pins.
+                                      This parameter can be a value of @ref GPIOSpeed_TypeDef */
+
+  GPIOMode_TypeDef GPIO_Mode;    /*!< Specifies the operating mode for the selected pins.
+                                      This parameter can be a value of @ref GPIOMode_TypeDef */
+}GPIO_InitTypeDef;
+
+
+typedef enum
+{ GPIO_Mode_AIN = 0x0,
+  GPIO_Mode_IN_FLOATING = 0x04,
+  GPIO_Mode_IPD = 0x28,
+  GPIO_Mode_IPU = 0x48,
+  GPIO_Mode_Out_OD = 0x14,
+  GPIO_Mode_Out_PP = 0x10,
+  GPIO_Mode_AF_OD = 0x1C,
+  GPIO_Mode_AF_PP = 0x18
+}GPIOMode_TypeDef;
+
+#define IS_GPIO_MODE(MODE) (((MODE) == GPIO_Mode_AIN) || ((MODE) == GPIO_Mode_IN_FLOATING) || \
+                            ((MODE) == GPIO_Mode_IPD) || ((MODE) == GPIO_Mode_IPU) || \
+                            ((MODE) == GPIO_Mode_Out_OD) || ((MODE) == GPIO_Mode_Out_PP) || \
+                            ((MODE) == GPIO_Mode_AF_OD) || ((MODE) == GPIO_Mode_AF_PP))
+
+
+#define GPIO_Pin_0                 ((uint16_t)0x0001)  /*!< Pin 0 selected */
+#define GPIO_Pin_1                 ((uint16_t)0x0002)  /*!< Pin 1 selected */
+#define GPIO_Pin_2                 ((uint16_t)0x0004)  /*!< Pin 2 selected */
+#define GPIO_Pin_3                 ((uint16_t)0x0008)  /*!< Pin 3 selected */
+#define GPIO_Pin_4                 ((uint16_t)0x0010)  /*!< Pin 4 selected */
+#define GPIO_Pin_5                 ((uint16_t)0x0020)  /*!< Pin 5 selected */
+#define GPIO_Pin_6                 ((uint16_t)0x0040)  /*!< Pin 6 selected */
+#define GPIO_Pin_7                 ((uint16_t)0x0080)  /*!< Pin 7 selected */
+#define GPIO_Pin_8                 ((uint16_t)0x0100)  /*!< Pin 8 selected */
+#define GPIO_Pin_9                 ((uint16_t)0x0200)  /*!< Pin 9 selected */
+#define GPIO_Pin_10                ((uint16_t)0x0400)  /*!< Pin 10 selected */
+#define GPIO_Pin_11                ((uint16_t)0x0800)  /*!< Pin 11 selected */
+#define GPIO_Pin_12                ((uint16_t)0x1000)  /*!< Pin 12 selected */
+#define GPIO_Pin_13                ((uint16_t)0x2000)  /*!< Pin 13 selected */
+#define GPIO_Pin_14                ((uint16_t)0x4000)  /*!< Pin 14 selected */
+#define GPIO_Pin_15                ((uint16_t)0x8000)  /*!< Pin 15 selected */
+#define GPIO_Pin_All               ((uint16_t)0xFFFF)  /*!< All pins selected */
+
+#define IS_GPIO_PIN(PIN) ((((PIN) & (uint16_t)0x00) == 0x00) && ((PIN) != (uint16_t)0x00))
+
+typedef enum
+{ 
+  GPIO_Speed_10MHz = 1,
+  GPIO_Speed_2MHz, 
+  GPIO_Speed_50MHz
+}GPIOSpeed_TypeDef;
+#define IS_GPIO_SPEED(SPEED) (((SPEED) == GPIO_Speed_10MHz) || ((SPEED) == GPIO_Speed_2MHz) || \
+                              ((SPEED) == GPIO_Speed_50MHz))
+~~~
+- 这里也是传入的指针.但是跟上面不同的是,这里需要我们在外部自己配置好了,然后再传入地址.
+- 那么这两个指针有何不同呢?
+- 第一个指针,指向的地址是寄存器地址.
+- 第二个指针,就是单纯地枚举,枚举的是掩码变量.这就是不同.
+- 可以看到,上面不论是`Pin`,还是`Mode`,还是`Speed`,都是需要用户选择的.而每一个都对应着一个掩码,从而在初始化的时候,对寄存器地址相关值进行配置.
+- 所以,一开始说的, 传入变量,`Typedef*`是地址,也有可能不对,因为也可能是多掩码的结构体.
+- 我往下看了看,还是符合地址在等号左,掩码在等号右侧的关系.
+- 我问了一下`ai`,第二个参数命名可以不用传递指针,为什么非要穿指针,它是这么回复的.
+    - 减少栈空间占用.结构体是按值传递的,如果不用指针,那么整个结构体会被复制一份到栈上.在嵌入式系统中,栈很小(有时只有几百字节),传指针更节省内存.指针传递只占4字节(ARM Cortex-M上),而结构体可能有好几十字节.
+    - 兼容性与灵活性更好.传指针后,可以直接修改外部结构体内容(虽然GPIO_Init里没改),但:某些其他外设初始化函数可能会修改用户传入的结构体(例如DMA,SPI初始化结构体).保持统一接口风格更方便维护.换句话说,这种设计是一种统一接口规范.
+    - 减少拷贝,提高效率.函数参数传递指针,只需传递地址,不用把整个结构体复制一遍.嵌入式场景下追求速度和代码体积,这是优化的一部分.
+- 好吧,那我们也多用指针操作吧.
+#### 举例3
+~~~C
+void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+  /* Check the parameters */
+  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
+  assert_param(IS_GPIO_PIN(GPIO_Pin));
+  
+  GPIOx->BSRR = GPIO_Pin;
+}
+~~~
+- 上面的明白了,这个也就明白了.不多bb了.
