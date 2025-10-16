@@ -1,0 +1,17 @@
+@startuml 基本步骤
+class 基本步骤{
+    --first step--
+    + 进行优先分组配置
+    --second step--
+    + 复位使能EXTI时钟
+    --third step--
+    + 配置中断线(建立映射关系)
+    --fourth step--
+    + NVIC控制器初始化(选择通道(IRQn),优先级等)
+    --fifth step--
+    + EXTI初始化(外部事件/中断外设初始化)
+    --sixth step--
+    + 中断通道函数配置
+}
+
+@enduml

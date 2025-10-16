@@ -1,0 +1,16 @@
+@startuml 中断执行函数
+class 中断执行函数{
+    void EXTI0_IRQHandler(void){
+
+    if(EXTI_GetITStatus(EXTI_Line0) == SET){
+        delay_ms(10);
+        
+        if(CHECK_KEY_UP == KEY_HIGH){
+            Set_LED(LED1, LIGHT);
+    ()    }
+    ()}
+    EXTI_ClearITPendingBit(EXTI_Line0);
+()}
+}
+
+@enduml
