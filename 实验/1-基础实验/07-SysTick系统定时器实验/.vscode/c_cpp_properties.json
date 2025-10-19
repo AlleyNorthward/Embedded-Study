@@ -3,13 +3,15 @@
         {
             "name": "Target 1",
             "includePath": [
-                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\04-使用库函数点亮第一个Led\\Libraries\\CMSIS",
-                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\04-使用库函数点亮第一个Led\\User",
-                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\04-使用库函数点亮第一个Led\\Libraries\\STM32F10x_StdPeriph_Driver\\inc",
-                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\04-使用库函数点亮第一个Led\\App\\led",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\Libraries\\CMSIS",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\User",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\Libraries\\STM32F10x_StdPeriph_Driver\\inc",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\App\\led",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\App\\clock",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\Public",
                 "F:\\0Embedded\\Code\\ARM\\ARMCC\\include",
                 "F:\\0Embedded\\Code\\ARM\\ARMCC\\include\\rw",
-                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\04-使用库函数点亮第一个Led\\Libraries\\STM32F10x_StdPeriph_Driver\\src"
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\07-SysTick系统定时器实验\\Libraries\\STM32F10x_StdPeriph_Driver\\src"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",
