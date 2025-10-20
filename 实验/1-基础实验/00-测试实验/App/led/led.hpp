@@ -34,15 +34,8 @@ public:
     void off(bool IsOwn = true);
 
     // 下面是额外封装方法
-    void Heart_Beat(void){
-        static u8 i = 0;
-        i++;
-        if(i % 20 == 0){
-            if(led == LED0) SET_LED0 = !SET_LED0;
-            else SET_LED1 = !SET_LED1;
-        }
-        delay_ms(10);
-    }
+    void Heart_Beat(void);
+
 };
 
 class LEDStaticBuilder{

@@ -1,8 +1,10 @@
 #include "key.hpp"
 
 void KEY::Init_KEY(uint32_t rcc, uint16_t pin, GPIO_TypeDef* port, GPIOMode_TypeDef mode){
-
+    this->KEY_PORT = port;
+    this->KEY_PIN = pin;
     KeyState = 1;
+
     GPIO_InitTypeDef KEY_Structure;
 
     KEY_Structure.GPIO_Mode = mode;
@@ -72,4 +74,20 @@ void KEY::on(KeyMode mode, void (*func)(), volatile unsigned long& PXin, u8 leve
         func();
     }
     else if (KeyState == 0 && PXin == !level) KeyState = 1;
+}
+
+void KEY::on(KeyMode mode ,void (*func)(), bool IsOwn){
+    if(IsOwn == true) this->on(mode, func);
+    else {
+        u8 level = 0;
+        if(key == KEY_UP) level = 1;
+        if(mode == KEY_HELD) KeyState = 1;
+
+        if(KeyState == 1 && GPIO_ReadInputDataBit(KEY_PORT, KEY_PIN) == level){
+            delay_ms(10);
+            KeyState = 0;
+            func();
+        }
+        else if(KeyState == 0 && GPIO_ReadInputDataBit(KEY_PORT, KEY_PIN) == !level) KeyState = 1;
+    }
 }

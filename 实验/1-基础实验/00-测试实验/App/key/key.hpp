@@ -47,6 +47,8 @@ class KEY{
 private:
     ChoseKey key;
     u8 KeyState;
+    GPIO_TypeDef* KEY_PORT;
+    uint16_t KEY_PIN;
 
     void Init_KEY(uint32_t rcc, uint16_t pin, GPIO_TypeDef* port, GPIOMode_TypeDef mode = GPIO_Mode_IPU);
 public:
@@ -56,7 +58,7 @@ public:
 
     void on(KeyMode mode, void (*func)());
     void on(KeyMode mode, void (*func)(), volatile unsigned long& PXin, u8 level = 0);
-
+    void on(KeyMode mode, void (*func)(), bool IsOwn);
 };
 
 #endif

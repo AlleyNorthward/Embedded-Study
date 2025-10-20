@@ -48,6 +48,15 @@ void LED::off(bool IsOwn){
     else GPIO_SetBits(LED_PORT, LED_PIN);
 }
 
+void LED::Heart_Beat(void){
+    static u8 i = 0;
+    i++;
+    if(i % 20 == 0){
+        if(led == LED0) SET_LED0 = !SET_LED0;
+        else SET_LED1 = !SET_LED1;
+    }
+    delay_ms(10);
+}
 
 
 
