@@ -18,56 +18,28 @@ class BEEP{
         看了RCC使能函数,一定会重复使用的.想了想,其实就是调整
     对应寄存器的位为1,重复使用没有影响.但是不要失能,避免影响
     其他器件.
+
+    @author 巷北
+    @time 2025.10.20 16:34
+        又修改了一下, .hpp中定义, .cpp中实现.因为补充代码的话,全
+    放在这里,过于冗杂.s
     */
 private:
     uint16_t BEEP_PIN;
     GPIO_TypeDef* BEEP_PORT;
 
-    void Init_BEEP(
-        uint32_t rcc,
-        uint16_t pin,
-        GPIO_TypeDef* port
-    ){  
-        this->BEEP_PIN = pin;
-        this->BEEP_PORT = port;
-
-        GPIO_InitTypeDef BEEP_Structure;
-        BEEP_Structure.GPIO_Mode = GPIO_Mode_Out_PP;
-        BEEP_Structure.GPIO_Pin = pin;
-        BEEP_Structure.GPIO_Speed = GPIO_Speed_50MHz;
-
-        RCC_APB2PeriphClockCmd(rcc, ENABLE);
-        GPIO_Init(port, &BEEP_Structure);
-        GPIO_ResetBits(port, pin);
-    }
-
+    void Init_BEEP(uint32_t rcc, uint16_t pin, GPIO_TypeDef* port);
 public:
-    BEEP(){
-        Init_BEEP(
-            BEEP_RCC_MASK,
-            BEEP_PIN_MASK,
-            BEEP_PORT_ADDR
-        );
-    }
-
-    BEEP(
-        uint32_t BEEP_RCC,
-        uint16_t BEEP_PIN,
-        GPIO_TypeDef* BEEP_PORT
-    ){
-        Init_BEEP(BEEP_RCC, BEEP_PIN, BEEP_PORT);
-    }
-
-    void on(bool IsOwn = true){
-        if (IsOwn) SET_BEEP = 1;
-        else GPIO_SetBits(BEEP_PORT, BEEP_PIN);
-    }
-
-    void off(bool IsOwn = true){
-        if (IsOwn) SET_BEEP = 0;
-        else GPIO_ResetBits(BEEP_PORT, BEEP_PIN);
-    }
-
+    BEEP();
+    BEEP(uint32_t BEEP_RCC, uint16_t BEEP_PIN, GPIO_TypeDef* BEEP_PORT);
+    void on(bool IsOwn = true);
+    void off(bool IsOwn = true);
 };
 
+class BEEPStaticBuilder{
+public:
+    static BEEP* beep;
+    static void on();
+    static void off();
+};
 #endif

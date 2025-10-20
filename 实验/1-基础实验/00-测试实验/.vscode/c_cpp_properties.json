@@ -3,13 +3,20 @@
         {
             "name": "Target 1",
             "includePath": [
-                "f:\\0github\\Embedded-Study\\实验(C++)\\04-使用库函数点亮第一个Led\\Libraries\\CMSIS",
-                "f:\\0github\\Embedded-Study\\实验(C++)\\04-使用库函数点亮第一个Led\\User",
-                "f:\\0github\\Embedded-Study\\实验(C++)\\04-使用库函数点亮第一个Led\\Libraries\\STM32F10x_StdPeriph_Driver\\inc",
-                "f:\\0github\\Embedded-Study\\实验(C++)\\04-使用库函数点亮第一个Led\\App\\led",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\Libraries\\CMSIS",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\User",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\Libraries\\STM32F10x_StdPeriph_Driver\\inc",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\clock",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\led",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\Public",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\beep",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\key",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\utils",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\exti",
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\App\\time",
                 "F:\\0Embedded\\Code\\ARM\\ARMCC\\include",
                 "F:\\0Embedded\\Code\\ARM\\ARMCC\\include\\rw",
-                "f:\\0github\\Embedded-Study\\实验(C++)\\04-使用库函数点亮第一个Led\\Libraries\\STM32F10x_StdPeriph_Driver\\src"
+                "f:\\0github\\Embedded-Study\\实验\\1-基础实验\\00-测试实验\\Libraries\\STM32F10x_StdPeriph_Driver\\src"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",

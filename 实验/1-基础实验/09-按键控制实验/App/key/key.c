@@ -28,6 +28,7 @@ u8 KEY_Scan(u8 mode){
     
     if (key == 1 && (KEY_UP == 1 || KEY0 == 0 || KEY1 == 0 || KEY2 == 0)){
         delay_ms(10); // 消抖
+        key = 0;
         if (KEY_UP == 1) return KEY_UP_PRESS;
         else if (KEY0 == 0) return KEY0_PRESS;
         else if (KEY1 == 0) return KEY1_PRESS;

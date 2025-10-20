@@ -487,6 +487,21 @@
               <FileType>1</FileType>
               <FilePath>.\App\time\time.c</FilePath>
             </File>
+            <File>
+              <FileName>led.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\led\led.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>key.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\key\key.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>beep.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\beep\beep.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

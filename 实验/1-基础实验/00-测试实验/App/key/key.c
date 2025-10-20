@@ -35,6 +35,7 @@ KEY_PRESS_TypeDef KEY_Scan(KeyMode mode){
     
     if (key == 1 && (CHECK_KEY_UP == KEY_HIGH || CHECK_KEY0 == KEY_LOW || CHECK_KEY1 == KEY_LOW || CHECK_KEY2 == KEY_LOW)){
         delay_ms(10); // 消抖
+        key = 0;
         if (CHECK_KEY_UP == KEY_HIGH) return KEY_UP_PRESS;
         else if (CHECK_KEY0 == KEY_LOW) return KEY0_PRESS;
         else if (CHECK_KEY1 == KEY_LOW) return KEY1_PRESS;
