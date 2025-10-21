@@ -33,6 +33,7 @@ void BEEP::off(bool IsOwn){
 }
 
 
+BEEP* BEEPStaticBuilder::beep = 0;
 
 void BEEPStaticBuilder::on(){
     if(beep) beep->on();
@@ -42,4 +43,3 @@ void BEEPStaticBuilder::off(){
     if(beep) beep->off();
 }
 
-BEEP* BEEPStaticBuilder::beep = 0;

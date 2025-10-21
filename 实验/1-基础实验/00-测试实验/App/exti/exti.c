@@ -65,50 +65,50 @@ void EXTI_USING_KEY_Init(void){
     EXTI_Init(EXTI_KEY_Init);
 }
 
-void EXTI0_IRQHandler(void){
+// void EXTI0_IRQHandler(void){
 
-    if(EXTI_GetITStatus(EXTI_Line0) == SET){
-        delay_ms(10);
+//     if(EXTI_GetITStatus(EXTI_Line0) == SET){
+//         delay_ms(10);
         
-        if(CHECK_KEY_UP == KEY_HIGH){
-            Set_LED(LED1, LIGHT);
-        }
-    }
-    EXTI_ClearITPendingBit(EXTI_Line0);
-}
+//         if(CHECK_KEY_UP == KEY_HIGH){
+//             Set_LED(LED1, LIGHT);
+//         }
+//     }
+//     EXTI_ClearITPendingBit(EXTI_Line0);
+// }
 
-void EXTI2_IRQHandler(void){
+// void EXTI2_IRQHandler(void){
 
-    if(EXTI_GetITStatus(EXTI_Line2) == SET){
-        delay_ms(10);
+//     if(EXTI_GetITStatus(EXTI_Line2) == SET){
+//         delay_ms(10);
 
-        if(CHECK_KEY2 == KEY_LOW){
-            Set_BEEP(ENABLE);
-        }
-    }
-    EXTI_ClearITPendingBit(EXTI_Line2);
-}
+//         if(CHECK_KEY2 == KEY_LOW){
+//             Set_BEEP(ENABLE);
+//         }
+//     }
+//     EXTI_ClearITPendingBit(EXTI_Line2);
+// }
 
-void EXTI3_IRQHandler(void){
+// void EXTI3_IRQHandler(void){
 
-    if(EXTI_GetITStatus(EXTI_Line3) == SET){
-        delay_ms(10);
+//     if(EXTI_GetITStatus(EXTI_Line3) == SET){
+//         delay_ms(10);
         
-        if(CHECK_KEY1 == KEY_LOW){
-            Set_LED(LED1, DARK);
-        }
-    }
-    EXTI_ClearITPendingBit(EXTI_Line3);
-}
+//         if(CHECK_KEY1 == KEY_LOW){
+//             Set_LED(LED1, DARK);
+//         }
+//     }
+//     EXTI_ClearITPendingBit(EXTI_Line3);
+// }
 
-void EXTI4_IRQHandler(void){
+// void EXTI4_IRQHandler(void){
 
-    if(EXTI_GetITStatus(EXTI_Line4) == SET){
-        delay_ms(10);
+//     if(EXTI_GetITStatus(EXTI_Line4) == SET){
+//         delay_ms(10);
 
-        if(CHECK_KEY0 == KEY_LOW){
-            Set_BEEP(DISABLE);
-        }
-    }
-    EXTI_ClearITPendingBit(EXTI_Line4);
-}
+//         if(CHECK_KEY0 == KEY_LOW){
+//             Set_BEEP(DISABLE);
+//         }
+//     }
+//     EXTI_ClearITPendingBit(EXTI_Line4);
+// }

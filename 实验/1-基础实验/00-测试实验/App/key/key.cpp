@@ -76,11 +76,9 @@ void KEY::on(KeyMode mode, void (*func)(), volatile unsigned long& PXin, u8 leve
     else if (KeyState == 0 && PXin == !level) KeyState = 1;
 }
 
-void KEY::on(KeyMode mode ,void (*func)(), bool IsOwn){
+void KEY::on(KeyMode mode ,void (*func)(), u8 level, bool IsOwn){
     if(IsOwn == true) this->on(mode, func);
     else {
-        u8 level = 0;
-        if(key == KEY_UP) level = 1;
         if(mode == KEY_HELD) KeyState = 1;
 
         if(KeyState == 1 && GPIO_ReadInputDataBit(KEY_PORT, KEY_PIN) == level){
@@ -90,4 +88,29 @@ void KEY::on(KeyMode mode ,void (*func)(), bool IsOwn){
         }
         else if(KeyState == 0 && GPIO_ReadInputDataBit(KEY_PORT, KEY_PIN) == !level) KeyState = 1;
     }
+}
+
+KEY* KEYStaticBuilder::key[4] = {0, 0, 0, 0};
+
+void KEYStaticBuilder::EXTI0_KEY_UP(){
+    key[3]->on(KEY_SINGLE, LEDStaticBuilder::led1_on);
+}
+
+void KEYStaticBuilder:: EXTI4_KEY0(){
+    key[0]->on(KEY_SINGLE, LEDStaticBuilder::led1_off);
+}
+
+void KEYStaticBuilder::EXTI3_KEY1(){
+    key[1]->on(KEY_SINGLE, BEEPStaticBuilder::on);
+}
+
+void KEYStaticBuilder::EXTI2_KEY2(){
+    key[2]->on(KEY_SINGLE, BEEPStaticBuilder::off);
+}
+
+KeyExtiManager::KeyExtiManager(){
+    EXTIManager::attach(0, KEYStaticBuilder::EXTI0_KEY_UP);
+    EXTIManager::attach(2, KEYStaticBuilder::EXTI2_KEY2);
+    EXTIManager::attach(3, KEYStaticBuilder::EXTI3_KEY1);
+    EXTIManager::attach(4, KEYStaticBuilder::EXTI4_KEY0);
 }

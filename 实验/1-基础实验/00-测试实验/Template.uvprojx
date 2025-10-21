@@ -502,6 +502,11 @@
               <FileType>8</FileType>
               <FilePath>.\App\beep\beep.cpp</FilePath>
             </File>
+            <File>
+              <FileName>exti.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\exti\exti.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

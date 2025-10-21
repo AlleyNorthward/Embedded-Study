@@ -3,6 +3,9 @@
 
 #include "system.h"
 #include "systick.h"
+#include "beep.hpp"
+#include "led.hpp"
+#include "exti.hpp"
 
 #define KEY_RCC_MASK                                RCC_APB2Periph_GPIOE
 #define KEY_UP_RCC_MASK                             RCC_APB2Periph_GPIOA
@@ -58,7 +61,20 @@ public:
 
     void on(KeyMode mode, void (*func)());
     void on(KeyMode mode, void (*func)(), volatile unsigned long& PXin, u8 level = 0);
-    void on(KeyMode mode, void (*func)(), bool IsOwn);
+    void on(KeyMode mode, void (*func)(), u8 level, bool IsOwn); // 外接低电平,level传0.eg:KEY_UP外接高电平, level=1.
 };
 
+class KEYStaticBuilder{
+public:
+    static KEY* key[4];
+    static void EXTI0_KEY_UP();
+    static void EXTI4_KEY0();
+    static void EXTI3_KEY1();
+    static void EXTI2_KEY2();
+};
+
+class KeyExtiManager{
+public:
+    KeyExtiManager();
+};
 #endif
