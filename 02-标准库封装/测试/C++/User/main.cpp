@@ -1,9 +1,10 @@
 #include "system.h"
 #include "beep.hpp"
 int main(){	 
-    BEEP beep;   
+
+    BEEP beep;
 	while(1){
-        beep.on();
+		beep.on();
 	}
 }
 

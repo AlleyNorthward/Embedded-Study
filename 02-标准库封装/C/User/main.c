@@ -15,12 +15,14 @@ int main()
 	KEY_Init();
 	BEEP_Init();
 	EXTI_USING_KEY_Init();  
+	volatile unsigned long* a;
+	a = &PBout(5);
 	while(1)
 	{
 		i++;
 		if(i%20==0)
 		{
-			SET_LED0=!SET_LED0;
+			*a=!*a;
 		}
 		delay_ms(10);
 	}
