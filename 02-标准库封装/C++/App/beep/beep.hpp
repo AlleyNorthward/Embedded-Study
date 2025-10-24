@@ -8,23 +8,21 @@ typedef struct{
     GPIO_TypeDef* BEEP_PORT_ADDR;
     uint16_t BEEP_PIN_MASK;
     volatile unsigned long* SET_BEEP;
+    u8 CNT;
 }BeepMapping_TypeDef;
 
 class BEEP{
 private:
-    void Init_BEEP(uint32_t BEEP_RCC, uint16_t BEEP_PIN, GPIO_TypeDef* BEEP_PORT, volatile unsigned long PX);
+    BeepMapping_TypeDef& SingleBeep;
 public:
-    BEEP();
+    BEEP(BeepMapping_TypeDef& beep);
     void on();
     void off();
+    static void on_global(u8 i);
+    static void off_global(u8 i);
 };
 
-// class BEEPStaticBuilder{
-// public:
-//     static BEEP* beep;
-//     static void on();
-//     static void off();
-// };
+
 #endif
 
 /*
@@ -44,3 +42,4 @@ public:
 @time 2025.10.23 21:01
     注释换到下面来了,放在上面看着奇怪.
 */
+

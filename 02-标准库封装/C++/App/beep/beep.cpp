@@ -1,43 +1,32 @@
 #include "beep.hpp"
 #include "construction.hpp"
+#include "static_manager.hpp"
 
-void BEEP::Init_BEEP(uint32_t rcc, uint16_t pin, GPIO_TypeDef* port, volatile unsigned long PX){
-    GPIO_InitTypeDef GPIO_InitStructure;	
+BEEP::BEEP(BeepMapping_TypeDef& beep):SingleBeep(beep){// 引用成员只能这么初始化
+    StaticBuilder::beep[SingleBeep.CNT] = this;
+    GPIO_InitTypeDef GPIO_InitStructure;
 
-	RCC_APB2PeriphClockCmd(rcc, ENABLE);
+    RCC_APB2PeriphClockCmd(SingleBeep.BEEP_RCC_MASK, ENABLE);
 
-	GPIO_InitStructure.GPIO_Pin = pin;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;	
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(port, &GPIO_InitStructure);
-	
-	// GPIO_ResetBits(port, pin);
-    PX = 0;
-}
-BEEP::BEEP(){
-    BeepMapping_TypeDef& beep = getBeepMapping();
-    Init_BEEP(beep.BEEP_RCC_MASK, beep.BEEP_PIN_MASK, beep.BEEP_PORT_ADDR, *beep.SET_BEEP);
+    GPIO_InitStructure.GPIO_Pin = SingleBeep.BEEP_PIN_MASK;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(SingleBeep.BEEP_PORT_ADDR, &GPIO_InitStructure);
+
+    *SingleBeep.SET_BEEP = 0;
 }
 
-
-void BEEP::on(){
-    BeepMapping_TypeDef& beep = getBeepMapping();
-    *beep.SET_BEEP= 1;
+inline void BEEP::on(){
+    *SingleBeep.SET_BEEP= 1;
 }
 
-void BEEP::off(){
-    BeepMapping_TypeDef& beep = getBeepMapping();
-    *beep.SET_BEEP = 0;
+inline void BEEP::off(){
+    *SingleBeep.SET_BEEP = 0;
 }
 
-
-// BEEP* BEEPStaticBuilder::beep = 0;
-
-// void BEEPStaticBuilder::on(){
-//     if(beep) beep->on();
-// }
-
-// void BEEPStaticBuilder::off(){
-//     if(beep) beep->off();
-// }
-
+void BEEP::on_global(u8 i){
+    StaticBuilder::beep[i]->on();
+}
+void BEEP::off_global(u8 i){
+    StaticBuilder::beep[i]->off();
+}

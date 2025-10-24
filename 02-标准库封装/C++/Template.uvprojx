@@ -467,6 +467,11 @@
               <FileType>8</FileType>
               <FilePath>.\Public\construction\construction.cpp</FilePath>
             </File>
+            <File>
+              <FileName>static_manager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Public\construction\static_manager.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

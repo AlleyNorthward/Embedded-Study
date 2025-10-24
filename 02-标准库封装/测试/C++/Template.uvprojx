@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\Public\construction</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\Public\construction;.\App\key;.\App\led</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -467,6 +467,11 @@
               <FileType>8</FileType>
               <FilePath>.\Public\construction\construction.cpp</FilePath>
             </File>
+            <File>
+              <FileName>static_manager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Public\construction\static_manager.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -476,6 +481,16 @@
               <FileName>beep.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\App\beep\beep.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>key.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\key\key.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>led.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\led\led.cpp</FilePath>
             </File>
           </Files>
         </Group>
