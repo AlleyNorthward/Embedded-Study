@@ -1,15 +1,17 @@
 #include "system.h"
+#include "systick.h"
+#include "led.hpp"
+#include "usart.hpp"
 #include "construction.hpp"
-#include "time.hpp"
-int main(){	 
-
+#include "static_manager.hpp"
+int main(){
 	SysTick_Init(SYSTICK_72MHz);
-	LED led0(PeripheralMapping::led0), led1(PeripheralMapping::led1);
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-	TIM time;
-	time.Init_TIM4(1000, 36000 - 1);
-	
+	USART usart1;
+	usart1.Init_USART1(115200);
+	LED led0(PeripheralMapping::led0);
 	while(1){
-		led1.Heart_Beat();
+		usart1.send_data_USART1();
+		led0.Heart_Beat();
 	}
 }
