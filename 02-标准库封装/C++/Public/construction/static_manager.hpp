@@ -2,10 +2,7 @@
 #define _STATIC_MANAGER_HPP
 
 #include "system.h"
-#include "led.hpp"
-#include "beep.hpp"
-#include "key.hpp"
-
+#include "construction.hpp"
 
 class StaticBuilder{
 public:

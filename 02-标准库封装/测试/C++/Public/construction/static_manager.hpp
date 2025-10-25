@@ -3,11 +3,11 @@
 
 #include "system.h"
 #include "led.hpp"
-#include "beep.hpp"
+
 
 class StaticBuilder{
 public:
-    static BEEP* beep[];
     static LED* led[2];
 };
+
 #endif

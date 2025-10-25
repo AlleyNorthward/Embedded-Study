@@ -16,14 +16,6 @@ LED::LED(LedMapping_TypeDef& led):SingleLed(led){
 	*SingleLed.SET_LED = 1;
 }
 
-inline void LED::on(){
-    *SingleLed.SET_LED = 0;
-}
-
-inline void LED::off(){
-    *SingleLed.SET_LED = 1;
-}
-
 void LED::on_global(u8 i){
     StaticBuilder::led[i]->on();
 }
@@ -38,7 +30,4 @@ void LED::Heart_Beat(void){
     if(i % 20 == 0){*SingleLed.SET_LED = !(*SingleLed.SET_LED);}
     delay_ms(10);
 }
-
-
-
 

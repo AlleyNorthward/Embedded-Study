@@ -1,6 +1,5 @@
 #include "beep.hpp"
 #include "construction.hpp"
-#include "static_manager.hpp"
 
 BEEP::BEEP(BeepMapping_TypeDef& beep):SingleBeep(beep){// 引用成员只能这么初始化
     StaticBuilder::beep[SingleBeep.CNT] = this;

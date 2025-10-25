@@ -2,10 +2,12 @@
 #define _CONSTRUCTION_HPP
 
 #include "system.h"
+#include "systick.h"
 #include "beep.hpp"
 #include "led.hpp"
 #include "key.hpp"
 #include "exti.hpp"
+#include "static_manager.hpp"
 
 
 class PeripheralMapping{

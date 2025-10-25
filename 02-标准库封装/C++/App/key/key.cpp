@@ -1,6 +1,5 @@
 #include "key.hpp"
-#include "systick.h"
-#include "static_manager.hpp"
+#include "construction.hpp"
 
 KEY::KEY(KeyMapping_TypeDef& key):KeyState(1), SingleKey(key){
     StaticBuilder::key[SingleKey.CNT] = this;

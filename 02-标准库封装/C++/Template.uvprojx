@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction;.\App\time</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -501,6 +501,11 @@
               <FileName>clock.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\App\clock\clock.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>time.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\time\time.cpp</FilePath>
             </File>
           </Files>
         </Group>

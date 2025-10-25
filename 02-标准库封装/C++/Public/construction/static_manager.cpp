@@ -33,3 +33,9 @@ extern "C" void EXTI4_IRQHandler(void){
     }
 }
 
+extern "C" void TIM4_IRQHandler(void){
+    if(TIM_GetITStatus(TIM4, TIM_IT_Update)){ 
+        StaticBuilder::led[0]->reverse();
+    }
+    TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+}

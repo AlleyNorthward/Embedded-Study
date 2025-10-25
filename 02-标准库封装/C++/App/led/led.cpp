@@ -1,7 +1,5 @@
 #include "led.hpp"
 #include "construction.hpp"
-#include "systick.h"
-#include "static_manager.hpp"
 
 LED::LED(LedMapping_TypeDef& led):SingleLed(led){
     StaticBuilder::led[SingleLed.CNT] = this;
@@ -30,7 +28,4 @@ void LED::Heart_Beat(void){
     if(i % 20 == 0){*SingleLed.SET_LED = !(*SingleLed.SET_LED);}
     delay_ms(10);
 }
-
-
-
 

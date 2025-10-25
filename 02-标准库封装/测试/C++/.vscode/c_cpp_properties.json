@@ -3,20 +3,18 @@
         {
             "name": "Target 1",
             "includePath": [
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\User",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\Libraries\\CMSIS",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\Libraries\\STM32F10x_StdPeriph_Driver\\inc",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\Public",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\App\\beep",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\App\\exti",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\App\\key",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\App\\led",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\App\\clock",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\Public\\construction",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\App\\time",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\User",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\Libraries\\CMSIS",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\Libraries\\STM32F10x_StdPeriph_Driver\\inc",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\Public",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\App\\beep",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\Public\\construction",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\App\\key",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\App\\led",
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\App\\time",
                 "F:\\0Embedded\\Code\\ARM\\ARMCC\\include",
                 "F:\\0Embedded\\Code\\ARM\\ARMCC\\include\\rw",
-                "f:\\0github\\Embedded-Study\\02-标准库封装\\C++\\Libraries\\STM32F10x_StdPeriph_Driver\\src"
+                "f:\\0github\\Embedded-Study\\02-标准库封装\\测试\\C++\\Libraries\\STM32F10x_StdPeriph_Driver\\src"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",
