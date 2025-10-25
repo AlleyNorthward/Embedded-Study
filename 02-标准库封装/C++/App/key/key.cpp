@@ -1,7 +1,9 @@
 #include "key.hpp"
 #include "systick.h"
+#include "static_manager.hpp"
 
 KEY::KEY(KeyMapping_TypeDef& key):KeyState(1), SingleKey(key){
+    StaticBuilder::key[SingleKey.CNT] = this;
     GPIO_InitTypeDef KEY_Structure;
 
     if(SingleKey.LEVEL == HIGH_LEVEL) KEY_Structure.GPIO_Mode = GPIO_Mode_IPD;
@@ -23,11 +25,4 @@ void KEY::on(KeyMode_TypeDef mode, KeyFunc_TypeDef func, u8 i){
     }
     else if(KeyState == 0 && *SingleKey.CHECK_KEY == !SingleKey.LEVEL) KeyState = 1;
 }
-
-
-inline void KEY::exti_on(KeyFunc_TypeDef func, u8 i){
-    //delay_ms(10);
-    if(*SingleKey.CHECK_KEY == SingleKey.LEVEL) func(i);
-}
-
 

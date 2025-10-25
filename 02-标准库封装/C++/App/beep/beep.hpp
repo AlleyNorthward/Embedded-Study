@@ -16,8 +16,9 @@ private:
     BeepMapping_TypeDef& SingleBeep;
 public:
     BEEP(BeepMapping_TypeDef& beep);
-    void on();
-    void off();
+    void on(){*SingleBeep.SET_BEEP= 1;};
+    void off(){*SingleBeep.SET_BEEP = 0;};
+    
     static void on_global(u8 i);
     static void off_global(u8 i);
 };

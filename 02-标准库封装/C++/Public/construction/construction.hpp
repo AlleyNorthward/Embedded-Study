@@ -5,6 +5,7 @@
 #include "beep.hpp"
 #include "led.hpp"
 #include "key.hpp"
+#include "exti.hpp"
 
 
 class PeripheralMapping{
@@ -21,5 +22,12 @@ public:
     static KeyMapping_TypeDef key1;
     static KeyMapping_TypeDef key2;
     static KeyMapping_TypeDef key3;
+
+    //exti
+    static ExtiMapping_TypeDef exti0;
+    static ExtiMapping_TypeDef exti1;
+    static ExtiMapping_TypeDef exti2;
+    static ExtiMapping_TypeDef exti3;
+    static ExtiMapping_TypeDef exti4;
 };
 #endif

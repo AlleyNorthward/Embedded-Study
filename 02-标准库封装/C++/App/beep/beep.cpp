@@ -16,17 +16,10 @@ BEEP::BEEP(BeepMapping_TypeDef& beep):SingleBeep(beep){// 引用成员只能这�
     *SingleBeep.SET_BEEP = 0;
 }
 
-inline void BEEP::on(){
-    *SingleBeep.SET_BEEP= 1;
-}
-
-inline void BEEP::off(){
-    *SingleBeep.SET_BEEP = 0;
-}
-
 void BEEP::on_global(u8 i){
     StaticBuilder::beep[i]->on();
 }
+
 void BEEP::off_global(u8 i){
     StaticBuilder::beep[i]->off();
 }

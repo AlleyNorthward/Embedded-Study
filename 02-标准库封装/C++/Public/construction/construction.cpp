@@ -60,6 +60,83 @@ KeyMapping_TypeDef PeripheralMapping::key3 = {
     3
 };
 
+ExtiMapping_TypeDef PeripheralMapping::exti0 = {
+    RCC_APB2Periph_AFIO,
+    GPIO_PortSourceGPIOA,
+    GPIO_PinSource0,
+    0,
+    {
+        EXTI0_IRQn,
+        2,
+        3,
+        ENABLE
+    },
+    {
+        EXTI_Line0,
+        EXTI_Mode_Interrupt,
+        EXTI_Trigger_Rising,
+        ENABLE
+    }
+};
+
+// ExtiMapping_TypeDef PeripheralMapping::exti1 = {};
+
+ExtiMapping_TypeDef PeripheralMapping::exti2 = {
+    RCC_APB2Periph_AFIO,
+    GPIO_PortSourceGPIOE,
+    GPIO_PinSource2,
+    2,
+    {
+        EXTI2_IRQn,
+        2,
+        2,
+        ENABLE
+    },
+    {
+        EXTI_Line2,
+        EXTI_Mode_Interrupt,
+        EXTI_Trigger_Falling,
+        ENABLE
+    }
+};
+
+ExtiMapping_TypeDef PeripheralMapping::exti3 = {
+    RCC_APB2Periph_AFIO,
+    GPIO_PortSourceGPIOE,
+    GPIO_PinSource3,
+    3,
+    {
+        EXTI3_IRQn,
+        2,
+        1,
+        ENABLE
+    },
+    {
+        EXTI_Line3,
+        EXTI_Mode_Interrupt,
+        EXTI_Trigger_Falling,
+        ENABLE
+    }
+};
+
+ExtiMapping_TypeDef PeripheralMapping::exti4 = {
+    RCC_APB2Periph_AFIO,
+    GPIO_PortSourceGPIOE,
+    GPIO_PinSource4,
+    4,
+    {
+        EXTI4_IRQn,
+        2,
+        0,
+        ENABLE
+    },
+    {
+        EXTI_Line4,
+        EXTI_Mode_Interrupt,
+        EXTI_Trigger_Falling,
+        ENABLE
+    }
+};
 /*
     使用方式:
     - 不改变数量,只需要在下方映射函数修改对应变量即可.使用时,传入结构体名即可.

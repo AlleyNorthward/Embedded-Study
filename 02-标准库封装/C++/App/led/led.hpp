@@ -16,8 +16,9 @@ private:
     LedMapping_TypeDef& SingleLed;
 public:
     LED(LedMapping_TypeDef& led);
-    void on();// 注意, 默认低电平点亮.
-    void off();
+    void on(){*SingleLed.SET_LED = 0;};// 注意, 默认低电平点亮.
+    void off(){*SingleLed.SET_LED = 1;};
+
     void static on_global(u8 i);
     void static off_global(u8 i);
     void Heart_Beat();

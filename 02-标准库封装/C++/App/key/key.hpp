@@ -33,7 +33,10 @@ private:
 public:
     KEY(KeyMapping_TypeDef& key);
     void on(KeyMode_TypeDef mode, KeyFunc_TypeDef func, u8 i);
-    void exti_on(KeyFunc_TypeDef func, u8 i);
+    
+    inline void exti_on(KeyFunc_TypeDef func, u8 i){
+        if(*SingleKey.CHECK_KEY == SingleKey.LEVEL) func(i);
+    }
 };
 
 #endif
