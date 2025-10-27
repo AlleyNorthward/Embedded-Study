@@ -53,6 +53,12 @@ void USART::send_data_USART1(){
     }
 }
 
+extern "C" int fputc(int ch, FILE* p){
+    USART_SendData(USART1, (u8)ch);
+    while(USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);
+    return ch;
+}
+
 extern "C" void USART1_IRQHandler(void){
     u8 r;
     if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){

@@ -1,7 +1,8 @@
 #ifndef _USART_HPP
-#define _USART_HPR
+#define _USART_HPP
 
 #include "system.h"
+#include "stdio.h"
 
 #define USART1_REC_LEN                  200
 

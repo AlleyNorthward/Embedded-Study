@@ -16,7 +16,7 @@ private:
     LedMapping_TypeDef& SingleLed;
 public:
     LED(LedMapping_TypeDef& led);
-    inline void on(){*SingleLed.SET_LED = 0;};
+    inline void on(){*SingleLed.SET_LED = 0;}; 
     inline void off(){*SingleLed.SET_LED = 1;};
     inline void reverse(){*SingleLed.SET_LED = !*SingleLed.SET_LED;};
 

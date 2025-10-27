@@ -1,5 +1,5 @@
 #include "led.hpp"
-#include "construction.hpp"
+#include "static_manager.hpp"
 
 LED::LED(LedMapping_TypeDef& led):SingleLed(led){
     StaticBuilder::led[SingleLed.CNT] = this;

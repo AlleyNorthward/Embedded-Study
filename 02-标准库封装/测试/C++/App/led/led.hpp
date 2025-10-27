@@ -25,6 +25,5 @@ public:
     void Heart_Beat();
 };
 
-
 #endif
 

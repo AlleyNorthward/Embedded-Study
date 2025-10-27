@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction;.\App\time;.\App\usart</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction;.\App\time;.\App\usart;.\Setup\_IQRHandler;.\Setup\config;.\Setup\launch;.\Setup\static;.\App\wdg</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -452,6 +452,16 @@
               <FileType>1</FileType>
               <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -466,16 +476,6 @@
               <FileName>systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Public\systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>construction.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\Public\construction\construction.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>static_manager.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\Public\construction\static_manager.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -516,6 +516,46 @@
               <FileName>usart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\App\usart\usart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>wdg.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\wdg\wdg.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Setup</GroupName>
+          <Files>
+            <File>
+              <FileName>_IQRHandler.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\_IQRHandler\_IQRHandler.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>IQR_manager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\_IQRHandler\IQR_manager.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>config.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\config\config.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>launch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\launch\launch.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>setup.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\launch\setup.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>static_manager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\static\static_manager.cpp</FilePath>
             </File>
           </Files>
         </Group>

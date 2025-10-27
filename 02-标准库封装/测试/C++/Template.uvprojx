@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\Public\construction;.\App\key;.\App\led;.\App\time;.\App\usart</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\Public\construction;.\App\key;.\App\led;.\App\time;.\App\usart;.\App\iwdg</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -452,6 +452,11 @@
               <FileType>1</FileType>
               <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -491,6 +496,16 @@
               <FileName>usart.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\App\usart\usart.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>key.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\key\key.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>iwdg.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\iwdg\iwdg.cpp</FilePath>
             </File>
           </Files>
         </Group>

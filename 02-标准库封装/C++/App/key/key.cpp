@@ -1,5 +1,5 @@
 #include "key.hpp"
-#include "construction.hpp"
+#include "static_manager.hpp"
 
 KEY::KEY(KeyMapping_TypeDef& key):KeyState(1), SingleKey(key){
     StaticBuilder::key[SingleKey.CNT] = this;
@@ -21,6 +21,18 @@ void KEY::on(KeyMode_TypeDef mode, KeyFunc_TypeDef func, u8 i){
         delay_ms(10);
         KeyState = 0;
         func(i);
+    }
+    else if(KeyState == 0 && *SingleKey.CHECK_KEY == !SingleKey.LEVEL) KeyState = 1;
+}
+
+void KEY::on(KeyMode_TypeDef mode, KeyFunc_zero_TypeDef func){
+	assert_param(IS_KEY_MODE(mode));
+    if(mode == KEY_HELD) KeyState = 1;
+
+    if(KeyState == 1 && *SingleKey.CHECK_KEY == SingleKey.LEVEL){
+        delay_ms(10);
+        KeyState = 0;
+        func();
     }
     else if(KeyState == 0 && *SingleKey.CHECK_KEY == !SingleKey.LEVEL) KeyState = 1;
 }

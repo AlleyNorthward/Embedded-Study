@@ -1,5 +1,5 @@
 #include "time.hpp"
-#include "construction.hpp"
+#include "config.hpp"
 
 void TIM::Init_TIM4(TIM4_TypeDef per, TIM4_TypeDef psc){
 
