@@ -364,63 +364,83 @@
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
+  </Group>
+
+  <Group>
+    <GroupName>SetUp</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>13</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\beep\beep.cpp</PathWithFileName>
-      <FilenameWithoutPath>beep.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\Setup\_IQRHandler\_IQRHandler.cpp</PathWithFileName>
+      <FilenameWithoutPath>_IQRHandler.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>14</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\exti\exti.cpp</PathWithFileName>
-      <FilenameWithoutPath>exti.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\Setup\_IQRHandler\IQR_manager.cpp</PathWithFileName>
+      <FilenameWithoutPath>IQR_manager.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>15</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\key\key.cpp</PathWithFileName>
-      <FilenameWithoutPath>key.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\Setup\config\config.cpp</PathWithFileName>
+      <FilenameWithoutPath>config.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>16</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\led\led.cpp</PathWithFileName>
-      <FilenameWithoutPath>led.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\Setup\launch\launch.cpp</PathWithFileName>
+      <FilenameWithoutPath>launch.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>17</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\App\clock\clock.cpp</PathWithFileName>
-      <FilenameWithoutPath>clock.cpp</FilenameWithoutPath>
+      <PathWithFileName>.\Setup\launch\setup.cpp</PathWithFileName>
+      <FilenameWithoutPath>setup.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>7</GroupNumber>
+      <FileNumber>18</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\Setup\static\static_manager.cpp</PathWithFileName>
+      <FilenameWithoutPath>static_manager.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

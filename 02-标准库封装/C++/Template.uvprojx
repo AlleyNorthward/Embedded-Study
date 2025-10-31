@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction;.\App\time;.\App\usart;.\Setup\_IQRHandler;.\Setup\config;.\Setup\launch;.\Setup\static;.\App\wdg</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction;.\App\time;.\App\usart;.\Setup\_IQRHandler;.\Setup\config;.\Setup\launch;.\Setup\static;.\App\wdg;.\App\input;.\Debug</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -522,6 +522,11 @@
               <FileType>8</FileType>
               <FilePath>.\App\wdg\wdg.cpp</FilePath>
             </File>
+            <File>
+              <FileName>input.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\input\input.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -556,6 +561,21 @@
               <FileName>static_manager.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\Setup\static\static_manager.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Debug</GroupName>
+          <Files>
+            <File>
+              <FileName>debugging.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Debug\debugging.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>setup_debug.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Debug\setup_debug.cpp</FilePath>
             </File>
           </Files>
         </Group>

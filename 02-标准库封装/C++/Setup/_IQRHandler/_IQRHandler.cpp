@@ -32,7 +32,7 @@ extern "C" void EXTI4_IRQHandler(void){
 
 extern "C" void TIM4_IRQHandler(void){
     if(TIM_GetITStatus(TIM4, TIM_IT_Update)){ 
-    IQRManager::tim4_handler();
+        IQRManager::tim4_handler();
     }
     TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
 }
@@ -43,6 +43,11 @@ extern "C" void USART1_IRQHandler(void){
     }
 }
 
-extern "C" void WWDG_IRQHandler(){
+extern "C" void WWDG_IRQHandler(void){
     IQRManager::wwdg_handler();
+}
+
+extern "C" void TIM5_IRQHandler(void){
+    IQRManager::tim5_handler();
+    TIM_ClearITPendingBit(TIM5, TIM_IT_CC1 | TIM_IT_Update);
 }

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\Setup\_IQRHandler;.\Setup\config;.\Setup\launch;.\Setup\static</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -466,31 +466,39 @@
         </Group>
         <Group>
           <GroupName>App</GroupName>
+        </Group>
+        <Group>
+          <GroupName>SetUp</GroupName>
           <Files>
             <File>
-              <FileName>beep.cpp</FileName>
+              <FileName>_IQRHandler.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\App\beep\beep.cpp</FilePath>
+              <FilePath>.\Setup\_IQRHandler\_IQRHandler.cpp</FilePath>
             </File>
             <File>
-              <FileName>exti.cpp</FileName>
+              <FileName>IQR_manager.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\App\exti\exti.cpp</FilePath>
+              <FilePath>.\Setup\_IQRHandler\IQR_manager.cpp</FilePath>
             </File>
             <File>
-              <FileName>key.cpp</FileName>
+              <FileName>config.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\App\key\key.cpp</FilePath>
+              <FilePath>.\Setup\config\config.cpp</FilePath>
             </File>
             <File>
-              <FileName>led.cpp</FileName>
+              <FileName>launch.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\App\led\led.cpp</FilePath>
+              <FilePath>.\Setup\launch\launch.cpp</FilePath>
             </File>
             <File>
-              <FileName>clock.cpp</FileName>
+              <FileName>setup.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>.\App\clock\clock.cpp</FilePath>
+              <FilePath>.\Setup\launch\setup.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>static_manager.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\Setup\static\static_manager.cpp</FilePath>
             </File>
           </Files>
         </Group>
