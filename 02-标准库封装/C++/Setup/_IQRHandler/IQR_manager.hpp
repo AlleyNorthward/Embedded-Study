@@ -12,6 +12,7 @@ public:
     static void exti4_handler();
     static void tim4_handler();
     static void usart1_handler();
+    static void usart1_dma_handler();
     static void wwdg_handler();
     static void tim5_handler();
 };

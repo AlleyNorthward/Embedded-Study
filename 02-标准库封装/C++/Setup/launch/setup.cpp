@@ -1,30 +1,29 @@
 #include "setup.hpp"
+#include "picture.h"
 
-volatile bool led_on = false;
-volatile u16 seconds = 0;
+SetUp::SetUp():led1(PeripheralMapping::led1){}
 
-SetUp::SetUp():
-led0(PeripheralMapping::led0),
-led1(PeripheralMapping::led1)
-{}
-
-void SetUp::Heart_Beat(){
-    StaticBuilder::led[1]->Heart_Beat();
-}
-
-void SetUp::usart_init(){
+void SetUp::tft_lcd_init(){
+    u16 color = 0;
     usart.Init_USART1(115200);
-    time.Init_TIM4(9999, 7199);
+    USART_Cmd(USART1, ENABLE);
+    tftlcd.TFTLCD_Init();
+
+    tftlcd.FRONT_COLOR = BLACK;
+    tftlcd.LCD_ShowString(10, 10, tftlcd.tftlcd_data.width, tftlcd.tftlcd_data.height, 12, (u8*) "Hello World!");
+    tftlcd.LCD_ShowString(10, 30, tftlcd.tftlcd_data.width, tftlcd.tftlcd_data.height, 16, (u8*) "Hello World!");
+    tftlcd.LCD_ShowString(10, 50, tftlcd.tftlcd_data.width, tftlcd.tftlcd_data.height, 24, (u8*) "Hello World!");
+    tftlcd.LCD_ShowFontHZ(10, 80, (u8*) "ÆÕÖÐ¿Æ¼¼");
+    tftlcd.LCD_ShowString(10, 120, tftlcd.tftlcd_data.width, tftlcd.tftlcd_data.height, 24, (u8*) "2417534000@qq.com");
+
+    tftlcd.LCD_Fill(10, 150, 60, 180, GRAY);
+    color = tftlcd.LCD_ReadPoint(20, 160);
+    printf("color = %x\r\n", color);
+    tftlcd.LCD_ShowPicture(20, 220, 200, 112, (u8*) gImage_picture);
+
 }
 
-void SetUp::usart_infos(){
-    if(RX_FINISHED(USART::USART1_RX_STA)){
-        u16 count = USART::get_RX_BUF();
-        if(count > 0){
-            seconds = count;
-            LED::on_global(0);
-            led_on = true;
-            TIM_Cmd(TIM4, ENABLE);
-        }
-    }
+void SetUp::tft_lcd_run(){
+    led1.Heart_Beat();
 }
+

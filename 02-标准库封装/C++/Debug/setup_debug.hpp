@@ -2,42 +2,15 @@
 #define _SET_UP_DEBUG_HPP
 
 #include "static_manager.hpp"
-#include "input.hpp"
 
 class SetUpDebug{
 private:
-    u16 data_printf;
-    float fdata_printf;
-    u8 printf_i;
-    u32 indata_input;
-
-	LED led0, led1;
-    KEY key0, key1, key2, key3;
-    ExternalInterrupt exti0, exti2, exti3, exti4;
-    BEEP beep;
-    WDG_ wdg;
     USART usart;
-    TIM time;
-    Input_ input;
-
-    static void feed_back_iwdg();
 protected:
     SetUpDebug();
-    void Heart_Beat();
-    void key_control();
-    void iwdg_init();
-    void key_control_iwdg();
-    void printf_init();
-    void printf_infos();
-    void usart_init();
-    void usart_infos();
-    void breath_init_PWM();
-    void breath_infos_PWM();
-    void tim4_exti_init();
-    void exti_key_control_init();
-    void wwdg_init();
-    void input_init();
-    void input_infos();
+    void debugging_printf();
+public:
+    void printf_encode(u8* p);
 };
 #endif
 

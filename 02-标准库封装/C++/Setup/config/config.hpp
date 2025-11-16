@@ -3,6 +3,7 @@
 
 #include "system.h"
 #include "systick.h"
+#include "dma.hpp"
 #include "beep.hpp"
 #include "led.hpp"
 #include "key.hpp"
@@ -10,6 +11,8 @@
 #include "usart.hpp"
 #include "time.hpp"
 #include "wdg.hpp"
+#include "adc.hpp"
+#include "tftlcd.hpp"
 
 
 class PeripheralMapping{

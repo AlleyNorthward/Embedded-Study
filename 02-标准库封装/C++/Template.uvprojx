@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\Public\construction;.\App\time;.\App\usart;.\Setup\_IQRHandler;.\Setup\config;.\Setup\launch;.\Setup\static;.\App\wdg;.\App\input;.\Debug</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\Public;.\App\beep;.\App\exti;.\App\key;.\App\led;.\App\clock;.\App\time;.\App\usart;.\Setup\_IQRHandler;.\Setup\config;.\Setup\launch;.\Setup\static;.\App\wdg;.\App\input;.\Debug;.\App\adc;.\App\dma;.\App\tftlcd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -462,6 +462,21 @@
               <FileType>1</FileType>
               <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -526,6 +541,21 @@
               <FileName>input.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\App\input\input.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>adc.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\adc\adc.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>dma.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\dma\dma.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>tftlcd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\App\tftlcd\tftlcd.cpp</FilePath>
             </File>
           </Files>
         </Group>

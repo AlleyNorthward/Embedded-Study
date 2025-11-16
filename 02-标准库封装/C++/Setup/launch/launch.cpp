@@ -4,10 +4,9 @@
 void App::init(){
     SysTick_Init(SYSTICK_72MHz);
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-    this->usart_init();
+    this->tft_lcd_init();
 }
 
 void App::run(){
-    this->usart_infos();
-    this->Heart_Beat();
+    this->tft_lcd_run();
 }

@@ -2,9 +2,7 @@
 #include "input.hpp"
 #include "setup.hpp"
 
-void IQRManager::exti0_handler(){
-    StaticBuilder::key[3]->exti_on(LED::on_global, 0);
-}
+void IQRManager::exti0_handler(){}
 
 // void IQRManager::exti1_handler(){}
 
@@ -20,18 +18,7 @@ void IQRManager::exti4_handler(){
     StaticBuilder::key[0]->exti_on(LED::off_global, 0);
 }
 
-void IQRManager::tim4_handler(){
-    TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
-
-    if(led_on && seconds > 0){
-        seconds--;
-        if(seconds == 0){
-            LED::off_global(0);
-            led_on = false;
-            TIM_Cmd(TIM4, DISABLE);
-        }
-    }
-}
+void IQRManager::tim4_handler(){}
 
 void IQRManager::usart1_handler(){
     u8 r;
@@ -50,6 +37,22 @@ void IQRManager::usart1_handler(){
             }
         }
     }
+}
+
+void IQRManager::usart1_dma_handler(){
+    volatile uint32_t tmp;
+    tmp = USART1->SR;
+    tmp = USART1->DR;
+
+    DMA_Cmd(DMA1_Channel5, DISABLE);
+    u16 len = DMA_REC_LEN - DMA_GetCurrDataCounter(DMA1_Channel5);
+
+    if(len >= 2 && DMA_::DMA_RX_buf[len-2] == 0x0D && DMA_::DMA_RX_buf[len-1] == 0x0A){
+            printf("received length: %d.", len - 2);
+        }
+
+    DMA_SetCurrDataCounter(DMA1_Channel5, DMA_REC_LEN);
+    DMA_Cmd(DMA1_Channel5, ENABLE);
 }
 
 void IQRManager::wwdg_handler(){

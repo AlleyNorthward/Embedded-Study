@@ -38,8 +38,8 @@ extern "C" void TIM4_IRQHandler(void){
 }
 
 extern "C" void USART1_IRQHandler(void){
-    if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){
-        IQRManager::usart1_handler();
+    if(USART_GetITStatus(USART1, USART_IT_IDLE) != RESET){
+        IQRManager::usart1_dma_handler();
     }
 }
 
